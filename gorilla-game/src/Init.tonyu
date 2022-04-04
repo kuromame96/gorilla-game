@@ -1,0 +1,27 @@
+\init(){
+    $backColor = "#faf2ee";
+    $fontColor = "#88001b";
+    $life = 3;
+    $miss = 0;
+    $point = 0;
+    $printSize = 100;
+}
+
+\scrInit(){
+    $Screen.resize( 1080, 1920 );
+    $Screen.setBGColor( $backColor );
+}
+
+\waitTouch(){
+    update();
+    
+    while( true ){
+        if( $touches[0].touched === 1 ) break;
+        update();
+    }
+}
+
+\retry(){
+    init();
+    loadPage( Game );
+}

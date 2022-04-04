@@ -1,0 +1,112 @@
+includes Init;
+init();
+scrInit();
+
+pl = new Player;
+en = new Actor{
+    p=$pat_saru, x=$screenWidth * 0.5, y=$screenHeight * 0.3,
+};
+en.hide();
+fukidasi = new Actor{
+    p=$pat_fukidasi, x=$screenWidth * 0.5, y=$screenHeight * 0.55,
+    zOrder=-10,
+};
+fukidasi.hide();
+text = new Label{ 
+    size=60,
+    x=$screenWidth * 0.5, y=$screenHeight * 0.55,
+    fillStyle=$fontColor, zOrder=-10
+};
+text.hide();
+
+$sound.playBGM( $se_k_147, true );
+
+update();
+
+while( pl.y > $screenHeight * 0.85 ){
+    pl.y += -5;
+    update();
+}
+
+fukidasi.show();
+text.show();
+
+text.text = "我々は!!";
+waitTouch();
+
+text.text = "キング・ゴリラを!!";
+waitTouch();
+
+text.text = "ついに!!";
+waitTouch();
+
+text.text = "見つけることが!!";
+waitTouch();
+
+text.text = "できなかった!!";
+waitTouch();
+
+text.text = "我々は!!";
+waitTouch();
+
+text.text = "苦虫を噛む!!";
+waitTouch();
+
+text.text = "その思いで!!";
+waitTouch();
+
+text.text = "家路に向かっている!!";
+waitTouch();
+
+text.hide();
+fukidasi.hide();
+
+$sound.stopBGM();
+$fillStyle = "black";
+$panel.fillRect( 0, 0, $screenWidth, $screenHeight );
+
+updateEx( 60 );
+
+text.show();
+
+text.fillStyle = "white";
+text.text = "何事だ!?";
+waitTouch();
+
+text.hide();
+text.fillStyle = $fontColor;
+
+$panel.clearRect( 0, 0, $screenWidth, $screenHeight );
+bg = new Actor{
+    p=$pat_kurayami, x=$screenWidth * 0.5, y=$screenHeight * 0.5,
+};
+en.show();
+
+for( i=0.5; i < 20; i += 0.1 ){
+    bg.scaleX = i; 
+    if( bg.alpha >= 0 ){
+        bg.alpha -= 10;
+    }else{
+        bg.alpha = 0;
+    }
+    update();
+}
+
+bg.die();
+update();
+
+text.show();
+fukidasi.show();
+
+$sound.playBGM( $se_k_106, true );
+
+text.text = "!!";
+waitTouch();
+
+text.text = "キング・ゴリラだあああ!!";
+waitTouch();
+
+text.text = "捕まえろおおおおおお!!";
+waitTouch();
+
+loadPage( Game );

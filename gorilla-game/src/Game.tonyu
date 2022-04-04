@@ -1,0 +1,42 @@
+includes Init;
+init();
+scrInit();
+frame = 0;
+step = 60;
+angleStep = 5;
+
+if( !$sound.getPlayingBGMName() ){
+    $sound.playBGM( $se_k_106, true );
+}
+
+new Tutorial;
+ui = new UI;
+
+while( true ){
+    if( frame % step === 0 ){
+        rnd( 0, 5 ) ? new Saru{normal=false, step=angleStep} : new Saru{normal=true, step=angleStep};
+    }
+    if( frame % 60 === 0 ){
+        if( step > 35 ) {
+            step--;
+            angleStep += 0.1;
+            frame = 0;
+        };
+    }
+    if( $life <= 0 ){
+        ui.clear();
+        new GameOver{ hitokotoText="ゴリラ!", ilust=$pat_gorilla_itimaie,fillStyle="white" };
+    }
+    if( $miss >= 10 ){
+        ui.clear();
+        if( $point <= 10 ){
+            new GameOver{ hitokotoText="悲しい", ilust=$pat_saru_hokaku_miss, fillStyle="black" };
+        }else{
+            new GameOver{ hitokotoText="確保!", ilust=$pat_saru_hokaku_yatta, fillStyle="black" };
+        }
+        
+    }
+    
+    frame++;
+    update();
+}
