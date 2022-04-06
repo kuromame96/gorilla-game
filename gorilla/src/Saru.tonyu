@@ -1,0 +1,23 @@
+includes BaseSaru;
+init();
+
+p=$pat_saru;
+
+reflesh( false );
+
+p=$pat_saru_hokaku;
+$sound.playSE( $se_jump );
+firstX = x;
+firstY = y;
+animeFrame = 30;
+while( animeFrame > 0 ){
+    x = firstX + ( rnd()+rnd()+rnd()+rnd()+rnd() ) * 10;
+    y = firstY + ( rnd()+rnd()+rnd()+rnd()+rnd() ) * 10;
+    
+    animeFrame--;
+    update();
+}
+
+$point++;
+
+die();

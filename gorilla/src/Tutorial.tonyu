@@ -1,0 +1,16 @@
+includes Init;
+t = timeStop();
+
+text = "キング・ゴリラを\nタッチorクリックで捕獲しろ!!\n5回捕まえ損なうとOUTだ!!\nそれからたまに出てくる\n一般・ゴリラには注意しろ!!\n奴らは獰猛だぞ!\n\nタッチorクリックでスタート";
+
+label = new Label{
+    x=$screenWidth * 0.5, y=$screenHeight * 0.35,
+    text=text, fillStyle=$fontColor, size=80, zOrder=-10,
+};
+
+waitTouch();
+
+t.release();
+
+label.die();
+die();

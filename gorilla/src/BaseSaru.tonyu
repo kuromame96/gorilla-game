@@ -1,0 +1,29 @@
+\init(){
+    step;
+    x = rnd( 745 * 0.5, $screenWidth - 745 * 0.5 );
+    y = rnd( 1102 * 0.5, $screenHeight - 1102 * 0.5 );
+    angle = 0;
+    scaleX = 1;
+    scale = 0.3;
+    touching=false;
+    
+    on( "touch", \(){
+        touching = true;
+    });
+}
+
+\reflesh( normal ){
+    while( !touching ){
+        y += -step;
+        scaleX = ( scale - cos( angle ) * scale );
+        if( angle > 360 ) {
+            if( !normal ) $miss++;
+            die();
+        };
+        
+        angle += step;
+        update();
+    }
+}
+
+

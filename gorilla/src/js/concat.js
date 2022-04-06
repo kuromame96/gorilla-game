@@ -151,70 +151,6 @@ Tonyu.klass.define({
   decls: {"methods":{"main":{"nowait":false},"init":{"nowait":false},"scrInit":{"nowait":false},"waitTouch":{"nowait":false},"retry":{"nowait":false}},"fields":{}}
 });
 Tonyu.klass.define({
-  fullName: 'user.NormalSaru',
-  shortName: 'NormalSaru',
-  namespace: 'user',
-  superclass: Tonyu.classes.kernel.Actor,
-  includes: [],
-  methods: function (__superClass) {
-    return {
-      main :function _trc_NormalSaru_main() {
-        "use strict";
-        var _this=this;
-        
-        _this.p=Tonyu.globals.$pat_gorila+0;
-        _this.x=_this.rnd(745*0.5,Tonyu.globals.$screenWidth-745);
-        _this.y=_this.rnd(1146*0.5,Tonyu.globals.$screenHeight-1146);
-        _this.angle=0;
-        _this.scaleX=1;
-        while (true) {
-          Tonyu.checkLoop();
-          if (_this.angle>360) {
-            _this.die();
-          }
-          _this.update();
-          
-        }
-      },
-      fiber$main :function _trc_NormalSaru_f_main(_thread) {
-        "use strict";
-        var _this=this;
-        //var _arguments=Tonyu.A(arguments);
-        var __pc=0;
-        
-        _this.p=Tonyu.globals.$pat_gorila+0;
-        _this.x=_this.rnd(745*0.5,Tonyu.globals.$screenWidth-745);
-        _this.y=_this.rnd(1146*0.5,Tonyu.globals.$screenHeight-1146);
-        _this.angle=0;
-        _this.scaleX=1;
-        
-        _thread.enter(function _trc_NormalSaru_ent_main(_thread) {
-          if (_thread.lastEx) __pc=_thread.catchPC;
-          for(var __cnt=100 ; __cnt--;) {
-            switch (__pc) {
-            case 0:
-            case 1:
-              if (_this.angle>360) {
-                _this.die();
-              }
-              _this.fiber$update(_thread);
-              __pc=2;return;
-            case 2:
-              
-              __pc=1;break;
-            case 3     :
-              
-              _thread.exit(_this);return;
-            }
-          }
-        });
-      },
-      __dummy: false
-    };
-  },
-  decls: {"methods":{"main":{"nowait":false}},"fields":{"angle":{}}}
-});
-Tonyu.klass.define({
   fullName: 'user.OP',
   shortName: 'OP',
   namespace: 'user',
@@ -506,201 +442,6 @@ Tonyu.klass.define({
   decls: {"methods":{"main":{"nowait":false}},"fields":{}}
 });
 Tonyu.klass.define({
-  fullName: 'user.Saru',
-  shortName: 'Saru',
-  namespace: 'user',
-  superclass: Tonyu.classes.kernel.Actor,
-  includes: [],
-  methods: function (__superClass) {
-    return {
-      main :function _trc_Saru_main() {
-        "use strict";
-        var _this=this;
-        
-        _this.normal;
-        _this.step;
-        if (! _this.normal) {
-          _this.p=Tonyu.globals.$pat_saru;
-        } else {
-          _this.p=Tonyu.globals.$pat_gorila;
-        }
-        _this.x=_this.rnd(745*0.5,Tonyu.globals.$screenWidth-745*0.5);
-        _this.y=_this.rnd(1102*0.5,Tonyu.globals.$screenHeight-1102*0.5);
-        _this.angle=0;
-        _this.scaleX=1;
-        _this.scale=0.3;
-        _this.touching=false;
-        _this.on("touch",(function anonymous_226() {
-          
-          _this.touching=true;
-        }));
-        while (! _this.touching) {
-          Tonyu.checkLoop();
-          _this.scaleX=(_this.scale-_this.cos(_this.angle)*_this.scale);
-          if (_this.angle>360) {
-            if (! _this.normal) {
-              Tonyu.globals.$miss++;
-            }
-            _this.die();
-            
-          }
-          ;
-          
-          _this.angle+=_this.step;
-          _this.update();
-          
-        }
-        if (! _this.normal) {
-          _this.p=Tonyu.globals.$pat_saru_hokaku;
-          Tonyu.globals.$sound.playSE(Tonyu.globals.$se_jump);
-          _this.firstX=_this.x;
-          _this.firstY=_this.y;
-          _this.animeFrame=30;
-          while (_this.animeFrame>0) {
-            Tonyu.checkLoop();
-            _this.x=_this.firstX+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
-            _this.y=_this.firstY+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
-            _this.animeFrame--;
-            _this.update();
-            
-          }
-          Tonyu.globals.$point++;
-          _this.die();
-          
-        } else {
-          _this.t=_this.timeStop();
-          _this.p=Tonyu.globals.$pat_gorila_ikari;
-          _this.zOrder=- 9;
-          Tonyu.globals.$sound.playSE(Tonyu.globals.$se_gottuan);
-          _this.firstX=Tonyu.globals.$screenWidth*0.5;
-          _this.firstY=Tonyu.globals.$screenHeight*0.5;
-          _this.scaleX=5;
-          _this.animeFrame=30;
-          while (_this.animeFrame>0) {
-            Tonyu.checkLoop();
-            _this.x=_this.firstX+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
-            _this.y=_this.firstY+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
-            _this.animeFrame--;
-            _this.update();
-            
-          }
-          Tonyu.globals.$life--;
-          _this.t.release();
-          _this.die();
-          
-        }
-      },
-      fiber$main :function _trc_Saru_f_main(_thread) {
-        "use strict";
-        var _this=this;
-        //var _arguments=Tonyu.A(arguments);
-        var __pc=0;
-        
-        _this.normal;
-        _this.step;
-        if (! _this.normal) {
-          _this.p=Tonyu.globals.$pat_saru;
-        } else {
-          _this.p=Tonyu.globals.$pat_gorila;
-        }
-        _this.x=_this.rnd(745*0.5,Tonyu.globals.$screenWidth-745*0.5);
-        _this.y=_this.rnd(1102*0.5,Tonyu.globals.$screenHeight-1102*0.5);
-        _this.angle=0;
-        _this.scaleX=1;
-        _this.scale=0.3;
-        _this.touching=false;
-        _this.on("touch",(function anonymous_226() {
-          
-          _this.touching=true;
-        }));
-        
-        _thread.enter(function _trc_Saru_ent_main(_thread) {
-          if (_thread.lastEx) __pc=_thread.catchPC;
-          for(var __cnt=100 ; __cnt--;) {
-            switch (__pc) {
-            case 0:
-            case 1:
-              if (!(! _this.touching)) { __pc=3     ; break; }
-              _this.scaleX=(_this.scale-_this.cos(_this.angle)*_this.scale);
-              if (_this.angle>360) {
-                if (! _this.normal) {
-                  Tonyu.globals.$miss++;
-                }
-                _this.die();
-                
-              }
-              ;
-              
-              _this.angle+=_this.step;
-              _this.fiber$update(_thread);
-              __pc=2;return;
-            case 2:
-              
-              __pc=1;break;
-            case 3     :
-              
-              if (!(! _this.normal)) { __pc=7     ; break; }
-              _this.p=Tonyu.globals.$pat_saru_hokaku;
-              Tonyu.globals.$sound.playSE(Tonyu.globals.$se_jump);
-              _this.firstX=_this.x;
-              _this.firstY=_this.y;
-              _this.animeFrame=30;
-            case 4:
-              if (!(_this.animeFrame>0)) { __pc=6     ; break; }
-              _this.x=_this.firstX+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
-              _this.y=_this.firstY+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
-              _this.animeFrame--;
-              _this.fiber$update(_thread);
-              __pc=5;return;
-            case 5:
-              
-              __pc=4;break;
-            case 6     :
-              
-              Tonyu.globals.$point++;
-              _this.die();
-              __pc=12    ;break;
-            case 7     :
-              _this.fiber$timeStop(_thread);
-              __pc=8;return;
-            case 8:
-              _this.t=_thread.retVal;
-              
-              _this.p=Tonyu.globals.$pat_gorila_ikari;
-              _this.zOrder=- 9;
-              Tonyu.globals.$sound.playSE(Tonyu.globals.$se_gottuan);
-              _this.firstX=Tonyu.globals.$screenWidth*0.5;
-              _this.firstY=Tonyu.globals.$screenHeight*0.5;
-              _this.scaleX=5;
-              _this.animeFrame=30;
-            case 9:
-              if (!(_this.animeFrame>0)) { __pc=11    ; break; }
-              _this.x=_this.firstX+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
-              _this.y=_this.firstY+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
-              _this.animeFrame--;
-              _this.fiber$update(_thread);
-              __pc=10;return;
-            case 10:
-              
-              __pc=9;break;
-            case 11    :
-              
-              Tonyu.globals.$life--;
-              _this.t.release();
-              _this.die();
-            case 12    :
-              
-              _thread.exit(_this);return;
-            }
-          }
-        });
-      },
-      __dummy: false
-    };
-  },
-  decls: {"methods":{"main":{"nowait":false}},"fields":{"normal":{},"step":{},"angle":{},"scale":{},"touching":{},"firstX":{},"firstY":{},"animeFrame":{},"t":{}}}
-});
-Tonyu.klass.define({
   fullName: 'user.Title',
   shortName: 'Title',
   namespace: 'user',
@@ -902,7 +643,7 @@ Tonyu.klass.define({
         var _this=this;
         
         _this.t=_this.timeStop();
-        _this.text="キング・ゴリラを\nタッチorクリックで捕獲しろ!!\n10回捕まえ損なうとOUTだ!!\nそれからたまに出てくる\n一般・ゴリラには注意しろ!!\n奴らは獰猛だぞ!\n\nタッチorクリックでスタート";
+        _this.text="キング・ゴリラを\nタッチorクリックで捕獲しろ!!\n5回捕まえ損なうとOUTだ!!\nそれからたまに出てくる\n一般・ゴリラには注意しろ!!\n奴らは獰猛だぞ!\n\nタッチorクリックでスタート";
         _this.label=new Tonyu.classes.kernel.Label({x: Tonyu.globals.$screenWidth*0.5,y: Tonyu.globals.$screenHeight*0.35,text: _this.text,fillStyle: Tonyu.globals.$fontColor,size: 80,zOrder: - 10});
         _this.waitTouch();
         _this.t.release();
@@ -926,7 +667,7 @@ Tonyu.klass.define({
             case 1:
               _this.t=_thread.retVal;
               
-              _this.text="キング・ゴリラを\nタッチorクリックで捕獲しろ!!\n10回捕まえ損なうとOUTだ!!\nそれからたまに出てくる\n一般・ゴリラには注意しろ!!\n奴らは獰猛だぞ!\n\nタッチorクリックでスタート";
+              _this.text="キング・ゴリラを\nタッチorクリックで捕獲しろ!!\n5回捕まえ損なうとOUTだ!!\nそれからたまに出てくる\n一般・ゴリラには注意しろ!!\n奴らは獰猛だぞ!\n\nタッチorクリックでスタート";
               _this.label=new Tonyu.classes.kernel.Label({x: Tonyu.globals.$screenWidth*0.5,y: Tonyu.globals.$screenHeight*0.35,text: _this.text,fillStyle: Tonyu.globals.$fontColor,size: 80,zOrder: - 10});
               _this.fiber$waitTouch(_thread);
               __pc=2;return;
@@ -1012,6 +753,129 @@ Tonyu.klass.define({
   decls: {"methods":{"main":{"nowait":false},"clear":{"nowait":false}},"fields":{"panel":{},"label":{}}}
 });
 Tonyu.klass.define({
+  fullName: 'user.BaseSaru',
+  shortName: 'BaseSaru',
+  namespace: 'user',
+  superclass: Tonyu.classes.kernel.Actor,
+  includes: [],
+  methods: function (__superClass) {
+    return {
+      main :function _trc_BaseSaru_main() {
+        "use strict";
+        var _this=this;
+        
+      },
+      fiber$main :function _trc_BaseSaru_f_main(_thread) {
+        "use strict";
+        var _this=this;
+        //var _arguments=Tonyu.A(arguments);
+        var __pc=0;
+        
+        
+        _thread.retVal=_this;return;
+      },
+      init :function _trc_BaseSaru_init() {
+        "use strict";
+        var _this=this;
+        
+        _this.step;
+        _this.x=_this.rnd(745*0.5,Tonyu.globals.$screenWidth-745*0.5);
+        _this.y=_this.rnd(1102*0.5,Tonyu.globals.$screenHeight-1102*0.5);
+        _this.angle=0;
+        _this.scaleX=1;
+        _this.scale=0.3;
+        _this.touching=false;
+        _this.on("touch",(function anonymous_216() {
+          
+          _this.touching=true;
+        }));
+      },
+      fiber$init :function _trc_BaseSaru_f_init(_thread) {
+        "use strict";
+        var _this=this;
+        //var _arguments=Tonyu.A(arguments);
+        var __pc=0;
+        
+        _this.step;
+        _this.x=_this.rnd(745*0.5,Tonyu.globals.$screenWidth-745*0.5);
+        _this.y=_this.rnd(1102*0.5,Tonyu.globals.$screenHeight-1102*0.5);
+        _this.angle=0;
+        _this.scaleX=1;
+        _this.scale=0.3;
+        _this.touching=false;
+        _this.on("touch",(function anonymous_216() {
+          
+          _this.touching=true;
+        }));
+        
+        _thread.retVal=_this;return;
+      },
+      reflesh :function _trc_BaseSaru_reflesh(normal) {
+        "use strict";
+        var _this=this;
+        
+        while (! _this.touching) {
+          Tonyu.checkLoop();
+          _this.y+=- _this.step;
+          _this.scaleX=(_this.scale-_this.cos(_this.angle)*_this.scale);
+          if (_this.angle>360) {
+            if (! normal) {
+              Tonyu.globals.$miss++;
+            }
+            _this.die();
+            
+          }
+          ;
+          
+          _this.angle+=_this.step;
+          _this.update();
+          
+        }
+      },
+      fiber$reflesh :function _trc_BaseSaru_f_reflesh(_thread,normal) {
+        "use strict";
+        var _this=this;
+        //var _arguments=Tonyu.A(arguments);
+        var __pc=0;
+        
+        
+        _thread.enter(function _trc_BaseSaru_ent_reflesh(_thread) {
+          if (_thread.lastEx) __pc=_thread.catchPC;
+          for(var __cnt=100 ; __cnt--;) {
+            switch (__pc) {
+            case 0:
+            case 1:
+              if (!(! _this.touching)) { __pc=3     ; break; }
+              _this.y+=- _this.step;
+              _this.scaleX=(_this.scale-_this.cos(_this.angle)*_this.scale);
+              if (_this.angle>360) {
+                if (! normal) {
+                  Tonyu.globals.$miss++;
+                }
+                _this.die();
+                
+              }
+              ;
+              
+              _this.angle+=_this.step;
+              _this.fiber$update(_thread);
+              __pc=2;return;
+            case 2:
+              
+              __pc=1;break;
+            case 3     :
+              
+              _thread.exit(_this);return;
+            }
+          }
+        });
+      },
+      __dummy: false
+    };
+  },
+  decls: {"methods":{"main":{"nowait":false},"init":{"nowait":false},"reflesh":{"nowait":false}},"fields":{"step":{},"angle":{},"scale":{},"touching":{}}}
+});
+Tonyu.klass.define({
   fullName: 'user.Game',
   shortName: 'Game',
   namespace: 'user',
@@ -1037,7 +901,7 @@ Tonyu.klass.define({
         while (true) {
           Tonyu.checkLoop();
           if (_this.frame%_this.step===0) {
-            _this.rnd(0,5)?new Tonyu.classes.user.Saru({normal: false,step: _this.angleStep}):new Tonyu.classes.user.Saru({normal: true,step: _this.angleStep});
+            _this.rnd(0,5)?new Tonyu.classes.user.Saru({step: _this.angleStep}):new Tonyu.classes.user.NormalSaru({step: _this.angleStep});
             
           }
           if (_this.frame%60===0) {
@@ -1056,7 +920,7 @@ Tonyu.klass.define({
             new Tonyu.classes.user.GameOver({hitokotoText: "ゴリラ!",ilust: Tonyu.globals.$pat_gorilla_itimaie,fillStyle: "white"});
             
           }
-          if (Tonyu.globals.$miss>=10) {
+          if (Tonyu.globals.$miss>=5) {
             _this.ui.clear();
             if (Tonyu.globals.$point<=10) {
               new Tonyu.classes.user.GameOver({hitokotoText: "悲しい",ilust: Tonyu.globals.$pat_saru_hokaku_miss,fillStyle: "black"});
@@ -1103,7 +967,7 @@ Tonyu.klass.define({
               _this.ui=new Tonyu.classes.user.UI;
             case 3:
               if (_this.frame%_this.step===0) {
-                _this.rnd(0,5)?new Tonyu.classes.user.Saru({normal: false,step: _this.angleStep}):new Tonyu.classes.user.Saru({normal: true,step: _this.angleStep});
+                _this.rnd(0,5)?new Tonyu.classes.user.Saru({step: _this.angleStep}):new Tonyu.classes.user.NormalSaru({step: _this.angleStep});
                 
               }
               if (_this.frame%60===0) {
@@ -1122,7 +986,7 @@ Tonyu.klass.define({
                 new Tonyu.classes.user.GameOver({hitokotoText: "ゴリラ!",ilust: Tonyu.globals.$pat_gorilla_itimaie,fillStyle: "white"});
                 
               }
-              if (Tonyu.globals.$miss>=10) {
+              if (Tonyu.globals.$miss>=5) {
                 _this.ui.clear();
                 if (Tonyu.globals.$point<=10) {
                   new Tonyu.classes.user.GameOver({hitokotoText: "悲しい",ilust: Tonyu.globals.$pat_saru_hokaku_miss,fillStyle: "black"});
@@ -1339,6 +1203,180 @@ Tonyu.klass.define({
     };
   },
   decls: {"methods":{"main":{"nowait":false},"actBuru":{"nowait":false}},"fields":{"aFPosList":{},"t":{},"hitokotoText":{},"ilust":{},"panel":{},"gari":{},"i":{},"actList":{}}}
+});
+Tonyu.klass.define({
+  fullName: 'user.NormalSaru',
+  shortName: 'NormalSaru',
+  namespace: 'user',
+  superclass: Tonyu.classes.kernel.Actor,
+  includes: [Tonyu.classes.user.BaseSaru],
+  methods: function (__superClass) {
+    return {
+      main :function _trc_NormalSaru_main() {
+        "use strict";
+        var _this=this;
+        
+        _this.init();
+        _this.p=Tonyu.globals.$pat_gorila+0;
+        _this.reflesh(true);
+        _this.t=_this.timeStop();
+        _this.p=Tonyu.globals.$pat_gorila_ikari;
+        _this.zOrder=- 9;
+        Tonyu.globals.$sound.playSE(Tonyu.globals.$se_gottuan);
+        _this.firstX=Tonyu.globals.$screenWidth*0.5;
+        _this.firstY=Tonyu.globals.$screenHeight*0.5;
+        _this.scaleX=5;
+        _this.animeFrame=30;
+        while (_this.animeFrame>0) {
+          Tonyu.checkLoop();
+          _this.x=_this.firstX+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
+          _this.y=_this.firstY+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
+          _this.animeFrame--;
+          _this.update();
+          
+        }
+        Tonyu.globals.$life--;
+        _this.t.release();
+        _this.die();
+      },
+      fiber$main :function _trc_NormalSaru_f_main(_thread) {
+        "use strict";
+        var _this=this;
+        //var _arguments=Tonyu.A(arguments);
+        var __pc=0;
+        
+        
+        _thread.enter(function _trc_NormalSaru_ent_main(_thread) {
+          if (_thread.lastEx) __pc=_thread.catchPC;
+          for(var __cnt=100 ; __cnt--;) {
+            switch (__pc) {
+            case 0:
+              _this.fiber$init(_thread);
+              __pc=1;return;
+            case 1:
+              
+              _this.p=Tonyu.globals.$pat_gorila+0;
+              _this.fiber$reflesh(_thread, true);
+              __pc=2;return;
+            case 2:
+              
+              _this.fiber$timeStop(_thread);
+              __pc=3;return;
+            case 3:
+              _this.t=_thread.retVal;
+              
+              _this.p=Tonyu.globals.$pat_gorila_ikari;
+              _this.zOrder=- 9;
+              Tonyu.globals.$sound.playSE(Tonyu.globals.$se_gottuan);
+              _this.firstX=Tonyu.globals.$screenWidth*0.5;
+              _this.firstY=Tonyu.globals.$screenHeight*0.5;
+              _this.scaleX=5;
+              _this.animeFrame=30;
+            case 4:
+              if (!(_this.animeFrame>0)) { __pc=6     ; break; }
+              _this.x=_this.firstX+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
+              _this.y=_this.firstY+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
+              _this.animeFrame--;
+              _this.fiber$update(_thread);
+              __pc=5;return;
+            case 5:
+              
+              __pc=4;break;
+            case 6     :
+              
+              Tonyu.globals.$life--;
+              _this.t.release();
+              _this.die();
+              _thread.exit(_this);return;
+            }
+          }
+        });
+      },
+      __dummy: false
+    };
+  },
+  decls: {"methods":{"main":{"nowait":false}},"fields":{"t":{},"firstX":{},"firstY":{},"animeFrame":{}}}
+});
+Tonyu.klass.define({
+  fullName: 'user.Saru',
+  shortName: 'Saru',
+  namespace: 'user',
+  superclass: Tonyu.classes.kernel.Actor,
+  includes: [Tonyu.classes.user.BaseSaru],
+  methods: function (__superClass) {
+    return {
+      main :function _trc_Saru_main() {
+        "use strict";
+        var _this=this;
+        
+        _this.init();
+        _this.p=Tonyu.globals.$pat_saru;
+        _this.reflesh(false);
+        _this.p=Tonyu.globals.$pat_saru_hokaku;
+        Tonyu.globals.$sound.playSE(Tonyu.globals.$se_jump);
+        _this.firstX=_this.x;
+        _this.firstY=_this.y;
+        _this.animeFrame=30;
+        while (_this.animeFrame>0) {
+          Tonyu.checkLoop();
+          _this.x=_this.firstX+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
+          _this.y=_this.firstY+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
+          _this.animeFrame--;
+          _this.update();
+          
+        }
+        Tonyu.globals.$point++;
+        _this.die();
+      },
+      fiber$main :function _trc_Saru_f_main(_thread) {
+        "use strict";
+        var _this=this;
+        //var _arguments=Tonyu.A(arguments);
+        var __pc=0;
+        
+        
+        _thread.enter(function _trc_Saru_ent_main(_thread) {
+          if (_thread.lastEx) __pc=_thread.catchPC;
+          for(var __cnt=100 ; __cnt--;) {
+            switch (__pc) {
+            case 0:
+              _this.fiber$init(_thread);
+              __pc=1;return;
+            case 1:
+              
+              _this.p=Tonyu.globals.$pat_saru;
+              _this.fiber$reflesh(_thread, false);
+              __pc=2;return;
+            case 2:
+              
+              _this.p=Tonyu.globals.$pat_saru_hokaku;
+              Tonyu.globals.$sound.playSE(Tonyu.globals.$se_jump);
+              _this.firstX=_this.x;
+              _this.firstY=_this.y;
+              _this.animeFrame=30;
+            case 3:
+              if (!(_this.animeFrame>0)) { __pc=5     ; break; }
+              _this.x=_this.firstX+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
+              _this.y=_this.firstY+(_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd()+_this.rnd())*10;
+              _this.animeFrame--;
+              _this.fiber$update(_thread);
+              __pc=4;return;
+            case 4:
+              
+              __pc=3;break;
+            case 5     :
+              
+              Tonyu.globals.$point++;
+              _this.die();
+              _thread.exit(_this);return;
+            }
+          }
+        });
+      },
+      __dummy: false
+    };
+  },
+  decls: {"methods":{"main":{"nowait":false}},"fields":{"firstX":{},"firstY":{},"animeFrame":{}}}
 });
 
 //# sourceMappingURL=concat.js.map

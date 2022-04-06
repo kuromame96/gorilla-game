@@ -14,7 +14,7 @@ ui = new UI;
 
 while( true ){
     if( frame % step === 0 ){
-        rnd( 0, 5 ) ? new Saru{normal=false, step=angleStep} : new Saru{normal=true, step=angleStep};
+        rnd( 0, 5 ) ? new Saru{step=angleStep} : new NormalSaru{step=angleStep};
     }
     if( frame % 60 === 0 ){
         if( step > 35 ) {
@@ -27,7 +27,7 @@ while( true ){
         ui.clear();
         new GameOver{ hitokotoText="ゴリラ!", ilust=$pat_gorilla_itimaie,fillStyle="white" };
     }
-    if( $miss >= 10 ){
+    if( $miss >= 5 ){
         ui.clear();
         if( $point <= 10 ){
             new GameOver{ hitokotoText="悲しい", ilust=$pat_saru_hokaku_miss, fillStyle="black" };

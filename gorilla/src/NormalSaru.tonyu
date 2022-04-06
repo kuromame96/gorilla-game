@@ -1,0 +1,28 @@
+includes BaseSaru;
+init();
+
+p = $pat_gorila+0;
+
+reflesh( true );
+
+t = timeStop();
+p=$pat_gorila_ikari;
+zOrder = -9;
+$sound.playSE( $se_gottuan );
+firstX = $screenWidth * 0.5;
+firstY = $screenHeight * 0.5;
+scaleX = 5;
+animeFrame = 30;
+while( animeFrame > 0 ){
+    x = firstX + ( rnd()+rnd()+rnd()+rnd()+rnd() ) * 10;
+    y = firstY + ( rnd()+rnd()+rnd()+rnd()+rnd() ) * 10;
+        
+    animeFrame--;
+    update();
+}
+    
+$life--;
+    
+t.release();
+    
+die();
