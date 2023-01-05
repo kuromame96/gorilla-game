@@ -158,10 +158,18 @@ Tonyu.klass.define({
         var _this=this;
         
         _this.size=100;
-        while (_this.alpha>=0) {
+        _this.decrease;
+        while (_this.alpha>=10) {
           Tonyu.checkLoop();
-          _this.y-=10;
-          _this.alpha-=10;
+          if (! _this.decrease) {
+            _this.y-=10;
+            _this.alpha-=10;
+            
+          } else {
+            _this.y-=_this.decrease;
+            _this.alpha-=_this.decrease;
+            
+          }
           _this.update();
           
         }
@@ -174,6 +182,7 @@ Tonyu.klass.define({
         var __pc=0;
         
         _this.size=100;
+        _this.decrease;
         
         _thread.enter(function _trc_DamageLabel_ent_main(_thread) {
           if (_thread.lastEx) __pc=_thread.catchPC;
@@ -181,9 +190,16 @@ Tonyu.klass.define({
             switch (__pc) {
             case 0:
             case 1:
-              if (!(_this.alpha>=0)) { __pc=3     ; break; }
-              _this.y-=10;
-              _this.alpha-=10;
+              if (!(_this.alpha>=10)) { __pc=3     ; break; }
+              if (! _this.decrease) {
+                _this.y-=10;
+                _this.alpha-=10;
+                
+              } else {
+                _this.y-=_this.decrease;
+                _this.alpha-=_this.decrease;
+                
+              }
               _this.fiber$update(_thread);
               __pc=2;return;
             case 2:
@@ -200,7 +216,7 @@ Tonyu.klass.define({
       __dummy: false
     };
   },
-  decls: {"methods":{"main":{"nowait":false}},"fields":{}}
+  decls: {"methods":{"main":{"nowait":false}},"fields":{"decrease":{}}}
 });
 Tonyu.klass.define({
   fullName: 'user.Ending',
@@ -815,7 +831,7 @@ Tonyu.klass.define({
               if (! Tonyu.globals.$continuePoint) {
                 if (Tonyu.globals.$step<30) {
                   Tonyu.globals.$sound.playSE(Tonyu.globals.$se_tirin1);
-                  new Tonyu.classes.user.DamageLabel({text: "チェックポイント到達！",x: Tonyu.globals.$screenWidth*0.5,y: Tonyu.globals.$screenHeight*0.5});
+                  new Tonyu.classes.user.DamageLabel({text: "チェックポイント到達",x: Tonyu.globals.$screenWidth*0.5,y: Tonyu.globals.$screenHeight*0.5,decrease: 5});
                   Tonyu.globals.$continuePoint=true;
                   
                 }
@@ -1084,7 +1100,7 @@ Tonyu.klass.define({
               if (! Tonyu.globals.$continuePoint) {
                 if (Tonyu.globals.$step<30) {
                   Tonyu.globals.$sound.playSE(Tonyu.globals.$se_tirin1);
-                  new Tonyu.classes.user.DamageLabel({text: "チェックポイント到達！",x: Tonyu.globals.$screenWidth*0.5,y: Tonyu.globals.$screenHeight*0.5});
+                  new Tonyu.classes.user.DamageLabel({text: "チェックポイント到達",x: Tonyu.globals.$screenWidth*0.5,y: Tonyu.globals.$screenHeight*0.5,decrease: 5});
                   Tonyu.globals.$continuePoint=true;
                   
                 }
