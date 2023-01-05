@@ -726,8 +726,18 @@ Tonyu.klass.define({
         Tonyu.globals.$Screen.setBGColor("black");
         Tonyu.globals.$Screen.resize(1080,1920);
         Tonyu.globals.$sound.playBGM("$se_dinner",true);
-        Tonyu.globals.$plHP=65;
-        Tonyu.globals.$step=60;
+        if (Tonyu.globals.$continuePoint==_this.nil) {
+          Tonyu.globals.$continuePoint=false;
+          
+        }
+        Tonyu.globals.$plHP=75;
+        if (! Tonyu.globals.$continuePoint) {
+          Tonyu.globals.$step=60;
+          
+        } else {
+          Tonyu.globals.$step=30;
+          
+        }
         Tonyu.globals.$printSize=120;
         Tonyu.globals.$playerDamage=false;
         Tonyu.globals.$enemyDamage=false;
@@ -778,7 +788,7 @@ Tonyu.klass.define({
             _this.loadPage(Tonyu.classes.user.Ending);
             
           }
-          while (_this.enemySpawn<3) {
+          while (_this.enemySpawn<6) {
             Tonyu.checkLoop();
             if (Tonyu.globals.$touches[0].touched===1) {
               Tonyu.globals.$sound.playSE("$se_walk");
@@ -794,12 +804,21 @@ Tonyu.klass.define({
               _this.bg.zOrder=1;
               Tonyu.globals.$step-=1;
               if (Tonyu.globals.$step>0) {
-                _this.enemySpawn=_this.rnd(0,4);
+                _this.enemySpawn=_this.rnd(0,7);
                 
               } else {
                 _this.enemySpawn=1;
                 break;
                 
+                
+              }
+              if (! Tonyu.globals.$continuePoint) {
+                if (Tonyu.globals.$step<30) {
+                  Tonyu.globals.$sound.playSE(Tonyu.globals.$se_tirin1);
+                  new Tonyu.classes.user.DamageLabel({text: "チェックポイント到達！",x: Tonyu.globals.$screenWidth*0.5,y: Tonyu.globals.$screenHeight*0.5});
+                  Tonyu.globals.$continuePoint=true;
+                  
+                }
                 
               }
               
@@ -948,8 +967,18 @@ Tonyu.klass.define({
         Tonyu.globals.$Screen.setBGColor("black");
         Tonyu.globals.$Screen.resize(1080,1920);
         Tonyu.globals.$sound.playBGM("$se_dinner",true);
-        Tonyu.globals.$plHP=65;
-        Tonyu.globals.$step=60;
+        if (Tonyu.globals.$continuePoint==_this.nil) {
+          Tonyu.globals.$continuePoint=false;
+          
+        }
+        Tonyu.globals.$plHP=75;
+        if (! Tonyu.globals.$continuePoint) {
+          Tonyu.globals.$step=60;
+          
+        } else {
+          Tonyu.globals.$step=30;
+          
+        }
         Tonyu.globals.$printSize=120;
         Tonyu.globals.$playerDamage=false;
         Tonyu.globals.$enemyDamage=false;
@@ -1023,7 +1052,7 @@ Tonyu.klass.define({
             case 9     :
               
             case 10:
-              if (!(_this.enemySpawn<3)) { __pc=18    ; break; }
+              if (!(_this.enemySpawn<6)) { __pc=18    ; break; }
               if (!(Tonyu.globals.$touches[0].touched===1)) { __pc=16    ; break; }
               Tonyu.globals.$sound.playSE("$se_walk");
               _this.bg2=new Tonyu.classes.user.BG({zOrder: 2});
@@ -1043,7 +1072,7 @@ Tonyu.klass.define({
               Tonyu.globals.$step-=1;
               if (!(Tonyu.globals.$step>0)) { __pc=14    ; break; }
               {
-                _this.enemySpawn=_this.rnd(0,4);
+                _this.enemySpawn=_this.rnd(0,7);
               }
               __pc=15    ;break;
             case 14    :
@@ -1052,6 +1081,15 @@ Tonyu.klass.define({
               
             case 15    :
               
+              if (! Tonyu.globals.$continuePoint) {
+                if (Tonyu.globals.$step<30) {
+                  Tonyu.globals.$sound.playSE(Tonyu.globals.$se_tirin1);
+                  new Tonyu.classes.user.DamageLabel({text: "チェックポイント到達！",x: Tonyu.globals.$screenWidth*0.5,y: Tonyu.globals.$screenHeight*0.5});
+                  Tonyu.globals.$continuePoint=true;
+                  
+                }
+                
+              }
             case 16    :
               
               _this.fiber$update(_thread);
@@ -1245,7 +1283,7 @@ Tonyu.klass.define({
       __dummy: false
     };
   },
-  decls: {"methods":{"main":{"nowait":false}},"fields":{"enemySpawn":{},"enemyAttack":{},"slowMargin":{},"bg":{},"pl":{},"enemy":{},"guage":{},"plNameText":{},"plHPText":{},"helpText":{},"stepText":{},"fill1Width":{},"fill2Width":{},"panel":{},"bgPanel":{},"bg2":{},"step":{}}}
+  decls: {"methods":{"main":{"nowait":false}},"fields":{"nil":{},"enemySpawn":{},"enemyAttack":{},"slowMargin":{},"bg":{},"pl":{},"enemy":{},"guage":{},"plNameText":{},"plHPText":{},"helpText":{},"stepText":{},"fill1Width":{},"fill2Width":{},"panel":{},"bgPanel":{},"bg2":{},"step":{}}}
 });
 Tonyu.klass.define({
   fullName: 'user.Odoriko1',
